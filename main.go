@@ -1,11 +1,9 @@
 package main
 
 import (
-	"fmt"
-	"leetcode/chapter127"
+	"leetcode/chapter11"
 )
 
 func main() {
-	fmt.Println(chapter127.LadderLength("hit", "cog",
-		[]string{"hot", "dot", "dog", "lot", "log", "cog"}))
+	chapter11.MaxArea([]int{3, 2, 1, 4, 5, 2})
 }
