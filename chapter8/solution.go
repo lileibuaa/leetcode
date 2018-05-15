@@ -7,8 +7,7 @@ func MyAtoi(str string) int {
 	factor := int64(1)
 	baseByte, upperByte := int64('0'), int64('9')
 	addSymbol, minusSymbol := int64('+'), int64('-')
-	hasCal := false
-	validStart := false
+	validStart := false //为true表示已经有有效的数字
 	spaceSymbol := int64(' ')
 	var sum int64 = 0
 	for _, tmpByte := range srcByte {
@@ -17,24 +16,24 @@ func MyAtoi(str string) int {
 			sum = sum*10 + (byteValue - baseByte)
 			validStart = true
 		} else if byteValue == minusSymbol {
-			if hasCal {
+			if validStart {
 				return int64ToInt(sum * factor)
 			} else {
-				hasCal = true
+				validStart = true
 				factor = -1
 			}
 		} else if byteValue == addSymbol {
-			if hasCal {
+			if validStart {
 				return int64ToInt(sum * factor)
 			} else {
-				hasCal = true
+				validStart = true
 			}
-		} else if !hasCal && !validStart && spaceSymbol == byteValue {
+		} else if !validStart && spaceSymbol == byteValue {
 			continue
 		} else {
 			return int64ToInt(sum * factor)
 		}
-		if sum > math.MaxInt32 {
+		if sum > math.MaxInt32 || sum < math.MinInt32 {
 			return int64ToInt(sum * factor)
 		}
 	}
